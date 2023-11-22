@@ -17,30 +17,32 @@ Make sure you have the following tools installed:
    git clone https://github.com/altynais/ontra-api-endpoint.git
 
 2. Create AWS ECR repository
-
-    export AWS_ACCESS_KEY_ID="your-access-key"
-    export AWS_SECRET_ACCESS_KEY="your-secret-key"
-    aws ecr create-repository --repository-name <repository-name>
-    aws ecr get-login-password --region <aws-region> | docker login --username AWS --password-stdin <ecr-repository-uri>
-
-
-3. Build image and push to aws registry
-
-    cd ontra-api-endpoint/api
-    docker build -t <image_name> .
-    docker tag <image_name>:latest <ecr-repository-uri>/<image_name>:latest
-    docker push <ecr-repository-uri>/<image_name>:latest
-
-4. Terraform init and apply
-
-    terraform init
-    terraform apply
+   
+   ```bash
+   export AWS_ACCESS_KEY_ID="your-access-key"
+   export AWS_SECRET_ACCESS_KEY="your-secret-key"
+   aws ecr create-repository --repository-name <repository-name>
+   aws ecr get-login-password --region <aws-region> | docker login --username AWS --password-stdin <ecr-repository-uri>
 
 
+4. Build image and push to aws registry
+   
+   ```bash
+   cd ontra-api-endpoint/api
+   docker build -t <image_name> .
+   docker tag <image_name>:latest <ecr-repository-uri>/<image_name>:latest
+   docker push <ecr-repository-uri>/<image_name>:latest
 
+6. Terraform init and apply
+   ```bash
+   terraform init
+   terraform apply
+7. Access API
+   ```bash
+   curl http://public_ip:8080/
 
-    Destoy resources:
-
-        terraform destroy
+Destoy resources:
+```bash
+   terraform destroy
 
 
